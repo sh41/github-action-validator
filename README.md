@@ -41,12 +41,27 @@ This action doesn't really need very many inputs. It will scan the default workf
 
 If you want to check any directory that _does not match_ `.github/workflows/*.yml`, you can specify that path by adding this to your config. 
 
-**Example:**
+**Simple Example:**
 ```yaml
     - name: Validate GitHub Actions
       uses: jazzsequence/github-action-validator@v1
       with:
         path-to-workflows: '.github/actions/*.yaml'
+```
+
+**Advanced Example (Multiple Paths and Recursive Globbing):**
+
+* **Recursive Globbing**: You can use `**` to match files nested in directories at any depth.
+* **Multiple Paths**: You can provide a multi-line string to validate several paths at the same time.
+ 
+This example validates all workflows in the standard directory and also recursively finds all `action.yml` files inside the `.github/actions` directory. This is the only supported method for specifying multiple patterns, as it correctly handles filenames with spaces.
+```yaml
+    - name: Validate Workflows and Custom Actions
+      uses: jazzsequence/github-action-validator@v1
+      with:
+        path-to-workflows: |-
+          .github/workflows/*.yml
+          .github/actions/**/action.yml
 ```
 
 #### `show-ascii-art`
