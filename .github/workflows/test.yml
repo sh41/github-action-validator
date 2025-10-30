@@ -6,10 +6,14 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v4
-      - name: Test fixtures
+      - name: Test fixtures (simple)
         uses: ./
         with:
             path-to-workflows: '.github/workflows/fixtures/*.yml'
             show-ascii-art: false
-      - name: Validate self
+      - name: Test all (advanced)
         uses: ./
+        with:
+          path-to-workflows: |-
+            .github/**/*.yml
+          show-ascii-art: true
